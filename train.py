@@ -4,6 +4,8 @@ import argparse
 import math
 from numpy import finfo
 
+import pdb
+
 import torch
 from distributed import apply_gradient_allreduce
 import torch.distributed as dist
@@ -16,6 +18,8 @@ from loss_function import Tacotron2Loss
 from logger import Tacotron2Logger
 from hparams import create_hparams
 
+from text import text_to_sequence, sequence_to_text
+from tqdm import tqdm
 
 def reduce_tensor(tensor, n_gpus):
     rt = tensor.clone()
@@ -204,13 +208,19 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
     is_overflow = False
     # ================ MAIN TRAINNIG LOOP! ===================
     for epoch in range(epoch_offset, hparams.epochs):
-        print("Epoch: {}".format(epoch))
+        print("Epoch: {}".format(epoch), flush=True)
         for i, batch in enumerate(train_loader):
             start = time.perf_counter()
             for param_group in optimizer.param_groups:
                 param_group['lr'] = learning_rate
 
             model.zero_grad()
+
+            #itext_padded, iinput_lengths, imel_padded, igate_padded, ioutput_lengths = batch
+            #pdb.set_trace()
+            #print(sequence_to_text(itext_padded[0].tolist()))
+
+            #print('.')
             x, y = model.parse_batch(batch)
             y_pred = model(x)
 
@@ -238,7 +248,7 @@ def train(output_directory, log_directory, checkpoint_path, warm_start, n_gpus,
             if not is_overflow and rank == 0:
                 duration = time.perf_counter() - start
                 print("Train loss {} {:.6f} Grad Norm {:.6f} {:.2f}s/it".format(
-                    iteration, reduced_loss, grad_norm, duration))
+                    iteration, reduced_loss, grad_norm, duration), flush=True)
                 logger.log_training(
                     reduced_loss, grad_norm, learning_rate, duration, iteration)
 
