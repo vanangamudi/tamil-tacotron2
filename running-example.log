@@ -1,0 +1,48 @@
+vanangamudi@karunthulai:~
+$ cd /tmp/
+
+vanangamudi@karunthulai:/tmp
+$ git clone https://github.com/vanangamudi/tamil-tacotron2
+
+vanangamudi@karunthulai:/tmp
+$ cd tamil-tacotron2/
+
+vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$  mkdir indictts_data
+
+vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$ cd indictts_data/
+
+vanangamudi@karunthulai:/tmp/tamil-tacotron2/indictts_data
+$ unzip ../../indictts_data.zip 
+
+vanangamudi@karunthulai:/tmp/tamil-tacotron2/indictts_data
+$ cd ../
+
+vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$ source ~/agam/env/tacotron2/bin/activate
+
+(tacotron2) vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$ python3 train.py --help
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/tensorflow/__init__.py", line 99, in <module>
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/tensorflow_core/__init__.py", line 28, in <module>
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/tensorflow/__init__.py", line 50, in __getattr__
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/tensorflow/__init__.py", line 44, in _load
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/tensorflow_core/python/__init__.py", line 120, in <module>
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/tensorflow_core/python/training/training.py", line 39, in <module>
+  
+(tacotron2) vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$ python train.py --help
+
+(tacotron2) vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$ python train.py -o outdir
+
+(tacotron2) vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$ python train.py -o outdir -l logdir
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/torch/nn/modules/module.py", line 1051, in _call_impl
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/apex-0.1-py3.6.egg/apex/amp/_initialize.py", line 197, in new_fwd
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/torch/nn/modules/module.py", line 1051, in _call_impl
+  File "/home/vanangamudi/agam/env/tacotron2/lib/python3.6/site-packages/torch/nn/modules/module.py", line 1051, in _call_impl
+  
+(tacotron2) vanangamudi@karunthulai:/tmp/tamil-tacotron2
+$ python train.py -o outdir -l logdir
